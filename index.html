@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>INSPIRE | PHOTO OSINT</title>
   <!-- Import the required fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -581,11 +581,45 @@
       display: none;
     }
     
-    /* Responsiveness - Enhanced Mobile Optimization */
+    /* Mobile-specific device classes */
+    .mobile-device {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+    .ios-device {
+      /* iOS Safari specific styles */
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .ios-device .main-content {
+      padding-top: max(20px, env(safe-area-inset-top));
+      padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
+    
+    .android-chrome {
+      /* Android Chrome specific styles */
+      min-height: calc(var(--vh, 1vh) * 100);
+    }
+    
+    /* Enhanced Mobile Optimization - Responsive Layouts */
     @media (max-width: 992px) {
       .results-content {
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .image-preview {
+        max-height: 250px;
+      }
+      
+      .scan-button {
+        width: 100%;
+        margin: 15px 0;
       }
     }
     
@@ -596,90 +630,76 @@
         position: relative;
         border-right: none;
         border-bottom: 2px solid var(--secondary);
-        padding: 10px 0;
+        padding: 12px 0;
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
+        gap: 8px;
       }
       
       .sidebar-button {
         width: auto;
-        margin: 5px;
-        font-size: 0.7rem;
-        padding: 8px 5px;
+        margin: 4px;
+        font-size: 0.75rem;
+        padding: 12px 10px;
+        min-width: 80px;
+        min-height: 44px; /* Touch-friendly size */
       }
       
       .main-content {
         margin-left: 0;
-        padding: 15px;
+        padding: 12px 8px;
       }
       
       .interface-header {
         flex-direction: column;
         text-align: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
       }
       
       .inspire-logo {
         margin-right: 0;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
+      }
+      
+      .logo-img {
+        width: 100px;
       }
       
       h1 {
-        font-size: 2rem;
-      }
-      
-      .status-bar {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-      }
-      
-      .status-dots {
-        display: none;
-      }
-      
-      .results-content {
-        grid-template-columns: 1fr;
-      }
-      
-      .image-preview {
-        max-height: 250px;
-      }
-      
-      .upload-area {
-        height: 160px;
-      }
-      
-      .metadata-section {
-        padding: 12px;
-      }
-    }
-    
-    /* Further mobile optimizations for smaller screens */
-    @media (max-width: 480px) {
-      .inspire-interface {
-        padding: 20px 10px;
-      }
-      
-      .photo-osint-module {
-        padding: 15px;
-      }
-      
-      h1 {
-        font-size: 1.7rem;
+        font-size: 1.8rem;
       }
       
       .subtitle {
         font-size: 0.9rem;
       }
       
+      .status-bar {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        padding: 12px;
+        margin-bottom: 20px;
+      }
+      
+      .status-dots {
+        display: none;
+      }
+      
+      .photo-osint-module {
+        padding: 15px 10px;
+      }
+      
       .upload-area {
-        height: 140px;
+        height: 150px;
+        max-width: 100%;
+        margin: 20px auto;
       }
       
       .upload-icon {
         font-size: 2.5rem;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
       }
       
       .upload-text {
@@ -687,36 +707,85 @@
       }
       
       .upload-subtext {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
+      }
+      
+      .alert-box {
+        margin: 15px auto;
+        padding: 12px;
+        max-width: 100%;
       }
       
       .results-panel {
-        padding: 15px;
+        padding: 15px 10px;
+        margin: 20px auto;
+      }
+      
+      .results-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .image-column {
+        order: 1;
+      }
+      
+      .data-column {
+        order: 2;
+      }
+      
+      .image-preview {
+        max-height: 200px;
+        margin-bottom: 12px;
+      }
+      
+      .metadata-section {
+        padding: 12px;
+        margin-bottom: 12px;
+      }
+      
+      .metadata-item {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(30, 144, 255, 0.1);
       }
       
       .metadata-label {
-        width: 120px;
-        font-size: 0.9rem;
+        width: 100%;
+        font-size: 0.85rem;
+        margin-bottom: 4px;
+        opacity: 0.8;
       }
       
       .metadata-value {
+        width: 100%;
         font-size: 0.9rem;
+        font-weight: 500;
       }
       
       .section-title {
         font-size: 0.9rem;
+        margin-bottom: 12px;
       }
       
-      #clock-time {
-        font-size: 2rem;
+      .scan-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.85rem;
+        margin: 15px 0;
       }
       
       .map-container {
         height: 200px;
+        margin-top: 12px;
       }
       
       .hash-visual {
         justify-content: center;
+        margin-top: 8px;
       }
       
       .hash-bit {
@@ -724,28 +793,200 @@
         height: 6px;
       }
       
+      /* Enhanced touch targets */
+      .sidebar-button,
+      .scan-button,
+      .upload-area {
+        -webkit-tap-highlight-color: rgba(30, 144, 255, 0.2);
+        touch-action: manipulation;
+      }
+    }
+    
+    /* Further mobile optimizations for smaller screens */
+    @media (max-width: 480px) {
+      .inspire-interface {
+        padding: 15px 8px;
+      }
+      
+      .photo-osint-module {
+        padding: 12px 6px;
+      }
+      
+      h1 {
+        font-size: 1.6rem;
+      }
+      
+      .subtitle {
+        font-size: 0.8rem;
+      }
+      
+      .upload-area {
+        height: 130px;
+      }
+      
+      .upload-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+      
+      .upload-text {
+        font-size: 0.9rem;
+      }
+      
+      .upload-subtext {
+        font-size: 0.75rem;
+      }
+      
+      .results-panel {
+        padding: 12px 8px;
+      }
+      
+      .metadata-section {
+        padding: 10px;
+      }
+      
+      .metadata-label {
+        font-size: 0.8rem;
+      }
+      
+      .metadata-value {
+        font-size: 0.85rem;
+      }
+      
+      .section-title {
+        font-size: 0.8rem;
+      }
+      
+      .image-preview {
+        max-height: 180px;
+      }
+      
+      .hash-bit {
+        width: 5px;
+        height: 5px;
+        gap: 1px;
+      }
+      
       .scan-button {
-        width: 100%;
         padding: 10px;
         font-size: 0.8rem;
+      }
+      
+      .alert-title {
+        font-size: 0.9rem;
+      }
+      
+      .alert-message {
+        font-size: 0.8rem;
+      }
+    }
+    
+    /* iOS Safari specific fixes */
+    @supports (-webkit-appearance: none) and (not (appearance: none)) {
+      .upload-area {
+        -webkit-appearance: none;
+        border-radius: 10px;
+      }
+      
+      .file-input {
+        -webkit-appearance: none;
+      }
+    }
+    
+    /* Android Chrome specific optimizations */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+      .photo-osint-module {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+      }
+      
+      .results-panel {
+        transform: translateZ(0);
+        backface-visibility: hidden;
       }
     }
     
     /* Touch interface improvements */
     @media (max-width: 768px) {
-      /* Larger touch targets */
-      .sidebar-button {
-        padding: 12px 10px;
+      /* Prevent double-tap zoom */
+      .upload-area,
+      .scan-button,
+      .sidebar-button,
+      .metadata-section {
+        touch-action: manipulation;
       }
       
-      /* Improved spacing for better touch interaction */
+      /* Better spacing for touch */
       .metadata-item {
-        padding: 4px 0;
+        padding: 8px 0;
+        min-height: 36px;
       }
       
-      /* Ensure scrollable areas are touch-friendly */
-      #all-metadata div {
+      /* Smooth transitions for mobile */
+      .upload-area,
+      .scan-button,
+      .sidebar-button {
+        transition: all 0.2s ease;
+      }
+      
+      /* Active states for touch feedback */
+      .upload-area:active {
+        transform: scale(0.98);
+      }
+      
+      .scan-button:active,
+      .sidebar-button:active {
+        transform: scale(0.97);
+      }
+      
+      /* Improved scrolling behavior */
+      .results-panel {
         -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+      }
+      
+      /* Better text selection on mobile */
+      .metadata-value {
+        -webkit-user-select: text;
+        user-select: text;
+      }
+    }
+    
+    /* Landscape mode optimizations for mobile */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .upload-area {
+        height: 120px;
+      }
+      
+      .results-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      
+      .image-preview {
+        max-height: 150px;
+      }
+      
+      .metadata-section {
+        padding: 8px;
+        margin-bottom: 8px;
+      }
+    }
+    
+    /* High DPI mobile screens */
+    @media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
+      .logo-img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
+      
+      .upload-icon {
+        filter: drop-shadow(0 0 3px rgba(255, 0, 85, 0.3));
+      }
+      
+      .hash-bit {
+        border-radius: 1px;
       }
     }
     
@@ -801,6 +1042,10 @@
       -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
     
+    .mobile-device .upload-area {
+      -webkit-tap-highlight-color: rgba(255, 0, 85, 0.1);
+    }
+    
     .touch-device .file-input {
       cursor: default;
     }
@@ -816,12 +1061,19 @@
       transition: transform 0.1s;
     }
     
+    .touch-device .upload-area:active {
+      transform: scale(0.98);
+      transition: transform 0.1s;
+    }
+    
     /* Fix for iOS Safari scrolling issues */
     @supports (-webkit-overflow-scrolling: touch) {
       body {
         -webkit-overflow-scrolling: touch;
       }
       
+      .results-panel,
+      .metadata-section,
       #all-metadata div {
         -webkit-overflow-scrolling: touch;
       }
@@ -845,7 +1097,7 @@
       <!-- Interface Header with Logo -->
       <div class="interface-header">
         <div class="inspire-logo">
-          <img src="../img/inspire-logo.png" alt="INSPIRE Logo" class="logo-img">
+          <img src="inspire.png" alt="INSPIRE Logo" class="logo-img">
         </div>
         <div class="interface-title">
           <h1>PHOTO<span class="accent">_</span>OSINT</h1>
@@ -1450,14 +1702,15 @@
         fileInput.click();
       });
       
-      // Handle touch events for mobile
+      // Handle touch events for mobile with enhanced functionality
       function setupTouchEvents() {
         // Make buttons more responsive on touch devices
         const touchButtons = document.querySelectorAll('.sidebar-button, .scan-button');
         
         touchButtons.forEach(button => {
-          button.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.98)';
+          button.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Prevent double-tap zoom
+            this.style.transform = 'scale(0.95)';
             
             if (this.classList.contains('sidebar-button')) {
               this.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3), 0 0 10px rgba(30, 144, 255, 0.5)';
@@ -1466,55 +1719,285 @@
             }
           });
           
-          button.addEventListener('touchend', function() {
+          button.addEventListener('touchend', function(e) {
+            e.preventDefault();
             this.style.transform = '';
             this.style.boxShadow = '';
           });
+          
+          // Prevent context menu on long press for mobile
+          button.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+          });
+        });
+        
+        // Enhanced mobile upload area handling
+        uploadArea.addEventListener('touchstart', function(e) {
+          this.style.transform = 'scale(0.98)';
+          this.style.backgroundColor = 'rgba(255, 0, 85, 0.15)';
+        });
+        
+        uploadArea.addEventListener('touchend', function(e) {
+          this.style.transform = '';
+          this.style.backgroundColor = '';
         });
         
         // Fix for iOS Safari to properly handle the file input
         if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-          fileInput.setAttribute('capture', 'camera');
+          // iOS-specific file input handling
+          fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+              // Add a small delay to ensure proper handling on iOS
+              setTimeout(() => {
+                handleFile(this.files[0]);
+              }, 100);
+            }
+          });
           
-          // iOS-specific alerts
-          const isIOS = document.createElement('div');
-          isIOS.className = 'metadata-section';
-          isIOS.style.marginTop = '10px';
-          isIOS.innerHTML = `
-            <div class="section-title">iOS DEVICE DETECTED</div>
-            <p style="font-size: 0.85rem; margin-bottom: 8px;">
-              On iOS, you may need to select "Photo Library" to access your photos.
-            </p>
+          // Add iOS-specific message
+          const iosMessage = document.createElement('div');
+          iosMessage.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--light);
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            z-index: 1000;
+            display: none;
+            text-align: center;
+            border: 1px solid var(--secondary);
+            box-shadow: 0 0 20px rgba(30, 144, 255, 0.3);
           `;
+          iosMessage.innerHTML = 'Processing image...<br>Please wait...';
+          document.body.appendChild(iosMessage);
           
-          // Insert after upload area
-          uploadArea.parentNode.insertBefore(isIOS, uploadArea.nextSibling);
+          // Show loading message on iOS during image processing
+          const originalHandleFile = handleFile;
+          handleFile = function(file) {
+            iosMessage.style.display = 'block';
+            setTimeout(() => {
+              originalHandleFile(file);
+              setTimeout(() => {
+                iosMessage.style.display = 'none';
+              }, 1000);
+            }, 300);
+          };
+          
+          // iOS-specific alert for photo library access
+          setTimeout(() => {
+            const iosAlert = document.createElement('div');
+            iosAlert.className = 'metadata-section';
+            iosAlert.style.marginTop = '10px';
+            iosAlert.innerHTML = `
+              <div class="section-title">iOS DEVICE DETECTED</div>
+              <p style="font-size: 0.85rem; margin-bottom: 8px;">
+                On iOS, you may need to select "Photo Library" to access your photos with metadata.
+              </p>
+            `;
+            
+            // Insert after upload area if it exists
+            if (uploadArea.parentNode) {
+              uploadArea.parentNode.insertBefore(iosAlert, uploadArea.nextSibling);
+            }
+          }, 2000);
         }
         
-        // Optimize scrolling behavior
+        // Android Chrome specific optimizations
+        if (/Android.*Chrome/.test(navigator.userAgent)) {
+          // Handle Android Chrome file processing
+          const originalProcessExifData = processExifData;
+          processExifData = function(tags, fileName, fileSize, fileType) {
+            // Force a repaint to fix rendering issues on Android Chrome
+            resultsPanel.style.display = 'none';
+            resultsPanel.offsetHeight; // Trigger reflow
+            resultsPanel.style.display = 'block';
+            
+            // Call original function
+            originalProcessExifData(tags, fileName, fileSize, fileType);
+          };
+        }
+        
+        // Mobile-specific gesture handling for results panel
+        let touchStartY = 0;
+        
+        if (resultsPanel) {
+          resultsPanel.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+          });
+          
+          resultsPanel.addEventListener('touchmove', function(e) {
+            // Prevent page scrolling when scrolling within results
+            if (this.scrollTop > 0 || e.touches[0].clientY > touchStartY) {
+              e.stopPropagation();
+            }
+          });
+        }
+        
+        // Optimize scrolling behavior for mobile
         document.querySelectorAll('.metadata-section').forEach(section => {
           section.style.overscrollBehavior = 'contain';
+          section.style.webkitOverflowScrolling = 'touch';
+        });
+        
+        // Prevent pull-to-refresh on mobile
+        document.addEventListener('touchstart', function(e) {
+          if (e.touches.length === 1) {
+            const touch = e.touches[0];
+            if (touch.clientY <= 50 && window.pageYOffset === 0) {
+              e.preventDefault();
+            }
+          }
         });
       }
       
-      // Check if device is touch-enabled
+      // Check if device is touch-enabled and initialize mobile features
       if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
         document.body.classList.add('touch-device');
+        
+        // Mobile-specific initialization
+        document.body.classList.add('mobile-device');
+        
+        // iOS Safari specific initialization
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+          document.body.classList.add('ios-device');
+          
+          // Fix iOS Safari viewport issues
+          const viewport = document.querySelector('meta[name="viewport"]');
+          viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+          
+          // Add iOS-specific styling for safe areas
+          document.documentElement.style.setProperty('--safe-area-inset-top', 'env(safe-area-inset-top)');
+          document.documentElement.style.setProperty('--safe-area-inset-bottom', 'env(safe-area-inset-bottom)');
+        }
+        
+        // Android Chrome specific initialization
+        if (/Android.*Chrome/.test(navigator.userAgent)) {
+          document.body.classList.add('android-chrome');
+          
+          // Fix Android Chrome address bar height issues
+          const setVH = () => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+          };
+          
+          setVH();
+          window.addEventListener('resize', setVH);
+        }
+        
+        // Mobile performance optimizations
+        document.addEventListener('touchstart', function() {}, { passive: true });
+        document.addEventListener('touchmove', function() {}, { passive: true });
+        
+        // Add mobile-specific loading indicator
+        const mobileIndicator = document.createElement('div');
+        mobileIndicator.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: rgba(18, 18, 18, 0.9);
+          color: var(--secondary);
+          padding: 8px 12px;
+          border-radius: 20px;
+          font-family: 'Orbitron', sans-serif;
+          font-size: 0.7rem;
+          z-index: 1000;
+          border: 1px solid var(--secondary);
+          box-shadow: 0 0 15px rgba(30, 144, 255, 0.3);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        `;
+        mobileIndicator.textContent = '📱 MOBILE MODE';
+        document.body.appendChild(mobileIndicator);
+        
+        // Show mobile indicator briefly
+        setTimeout(() => {
+          mobileIndicator.style.opacity = '1';
+          setTimeout(() => {
+            mobileIndicator.style.opacity = '0';
+            setTimeout(() => {
+              if (document.body.contains(mobileIndicator)) {
+                document.body.removeChild(mobileIndicator);
+              }
+            }, 300);
+          }, 2000);
+        }, 500);
+        
         setupTouchEvents();
       }
       
-      // Handle orientation change on mobile
+      // Enhanced orientation change handling for mobile
       window.addEventListener('orientationchange', function() {
-        // Redraw any visual elements that might need it after orientation change
-        setTimeout(() => {
-          if (hashVisual.childElementCount > 0) {
-            visualizeHash(md5HashEl.textContent);
+        // Hide elements temporarily to prevent visual glitches
+        if (window.innerWidth <= 768) {
+          const mainElements = [resultsPanel, uploadArea];
+          mainElements.forEach(el => {
+            if (el && el.style.display !== 'none') {
+              el.style.opacity = '0.5';
+            }
+          });
+          
+          setTimeout(() => {
+            // Restore opacity and refresh layout
+            mainElements.forEach(el => {
+              if (el && el.style.display !== 'none') {
+                el.style.opacity = '1';
+              }
+            });
+            
+            // Refresh hash visualization if it exists
+            if (hashVisual.childElementCount > 0 && md5HashEl.textContent) {
+              visualizeHash(md5HashEl.textContent);
+            }
+            
+            // Re-adjust image preview size
+            if (imagePreview.src) {
+              if (window.innerWidth <= 768) {
+                imagePreview.style.maxHeight = window.innerHeight < window.innerWidth ? '150px' : '200px';
+              }
+            }
+            
+            // Add glitch effect
+            addGlitchEffect(document.querySelector('.interface-title h1'));
+          }, 300);
+        }
+      });
+      
+      // Handle window resize for better mobile responsiveness
+      window.addEventListener('resize', function() {
+        if (window.innerWidth <= 768) {
+          // Ensure proper sizing on mobile
+          if (imagePreview.src) {
+            imagePreview.style.maxHeight = window.innerHeight < window.innerWidth ? '150px' : '200px';
           }
           
-          // Re-adjust glitch effect positions
-          addGlitchEffect(document.querySelector('.interface-title h1'));
-        }, 300);
+          // Ensure touch targets are properly sized
+          const touchTargets = document.querySelectorAll('.sidebar-button, .scan-button');
+          touchTargets.forEach(target => {
+            target.style.minHeight = '44px';
+          });
+        }
       });
+      
+      // Prevent zoom on double tap for specific elements on mobile
+      if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        const preventZoomElements = document.querySelectorAll('.upload-area, .scan-button, .metadata-section');
+        
+        preventZoomElements.forEach(element => {
+          let lastTouchEnd = 0;
+          element.addEventListener('touchend', function(e) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+              e.preventDefault();
+            }
+            lastTouchEnd = now;
+          }, false);
+        });
+      }
       
       // Occasionally add glitch effect to UI elements
       setInterval(() => {
@@ -1547,6 +2030,53 @@
             this.style.boxShadow = '';
           });
         });
+      }
+      
+      // Mobile-specific memory management and lifecycle handling
+      if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        // Clean up resources when page is hidden (mobile app switching)
+        document.addEventListener('visibilitychange', function() {
+          if (document.hidden) {
+            // Clear any ongoing animations to save battery
+            const glitchElements = document.querySelectorAll('.glitch');
+            glitchElements.forEach(el => el.classList.remove('glitch'));
+            
+            // Pause scanning animation if active
+            if (uploadArea.classList.contains('scanning')) {
+              uploadArea.classList.remove('scanning');
+            }
+          }
+        });
+        
+        // Handle mobile app lifecycle
+        window.addEventListener('pageshow', function(e) {
+          if (e.persisted) {
+            // Page was restored from cache, refresh any displayed data
+            if (resultsPanel.style.display !== 'none' && md5HashEl.textContent) {
+              visualizeHash(md5HashEl.textContent);
+            }
+          }
+        });
+        
+        // Enhanced mobile detection and initial setup
+        setTimeout(() => {
+          if (window.innerWidth <= 768) {
+            // Ensure all touch targets meet minimum size requirements on mobile
+            const touchTargets = document.querySelectorAll('.sidebar-button, .scan-button, .upload-area');
+            touchTargets.forEach(target => {
+              const rect = target.getBoundingClientRect();
+              if (rect.height < 44) {
+                target.style.minHeight = '44px';
+                target.style.display = 'flex';
+                target.style.alignItems = 'center';
+                target.style.justifyContent = 'center';
+              }
+            });
+            
+            // Show mobile optimization message
+            showAlert('Mobile optimization active. Tap to upload images and extract metadata.', false);
+          }
+        }, 1000);
       }
     });
   </script>
